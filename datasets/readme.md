@@ -1,312 +1,317 @@
-# 📊 Datasets do Solarium SIEP
+<div align="center">
 
-Sistema Inteligente de Estimativa de Produtividade Solar
+# Datasets do Solarium SIEP
+**Sistema Inteligente de Estimativa de Produtividade Solar**
+</div>
 
----
+<br>
 
-## ⚠️ IMPORTANTE: Acesso aos Dados
+## Acesso aos Dados
+Os arquivos CSV estão disponíveis acima, mas são grandes demais para serem visualizados diretamente no GitHub. 
+É possível fazer o download dos [Solarium Datasets](https://drive.google.com/drive/folders/1djeVJF4Egq1vTHZ2Lkt__td-xvN0r-sW?usp=drive_link) pelo Google Drive clicando no hiperlink.
 
-Os arquivos CSV são grandes demais para o GitHub.
-
-**📥 Download dos Datasets:**  
-Google Drive: https://drive.google.com/drive/folders/1djeVJF4Egq1vTHZ2Lkt__td-xvN0r-sW?usp=drive_link
-
----
-
-## 📋 Lista de Arquivos e Renomeação
-
-### Arquivo Original → Nome Usado no Projeto
-
-**Dataset 1:**
-- `pv.csv` → `geracao_5anos.csv`
-
-**Dataset 2:**
-- `Plant_1_Generation_Data.csv` → `plant1_geracao.csv`
-- `Plant_1_Weather_Sensor_Data.csv` → `plant1_clima.csv`
-
-**Dataset 3:**
-- `POWER_Point_Hourly_[...]_UTC.csv` → `nasa_clima.csv`
-
-**Dataset 4:**
-- `pv_train_set4.csv` → `geracao_treino.csv`
-- `pv_test_set4.csv` → `geracao_teste.csv`
-- `weather_train_set4.csv` → `clima_treino.csv`
-- `demand_train_set4.csv` → `consumo_treino.csv`
-- `demand_test_set4.csv` → `consumo_teste.csv`
+<br>
 
 ---
 
-## Dataset 1: Geração Solar (5 anos)
+## Dataset 1: Geração Solar Residencial (5 anos)
+<img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Sun%20Behind%20Cloud.png" width="120" />
+
+<details>
+<summary><b>Ver detalhes de geracao_5anos.csv</b></summary>
+
+<br>
 
 **Arquivo:** `geracao_5anos.csv`  
-**Nome original:** `pv.csv`  
-**Fonte:** Kaggle - Residential Photovoltaic Power Generation  
-**Link:** https://www.kaggle.com/datasets/kollosp/10kwp-5years-power-generation
+**Original:** `pv.csv`  
+**Fonte:** [Kaggle - Residential PV Power Generation](https://www.kaggle.com/datasets/kollosp/10kwp-5years-power-generation)  
+**Período:** 2015-2020 (5 anos)  
+**Frequência:** Horária/Diária  
+**Sistema:** 10kWp residencial
 
-**Descrição:**  
-Dados de geração de energia de um sistema solar residencial de 10kWp ao longo de 5 anos (2015-2020).
+### Descrição
+Dados de geração de energia de um sistema solar residencial ao longo de 5 anos, cobrindo ciclos sazonais completos.
 
-**Para que serve:**
+### Para que serve
 - Treinar o modelo principal de predição de geração
 - Analisar sazonalidade e tendências de longo prazo
 - Identificar padrões de degradação dos painéis
 
-**Variáveis esperadas:**
-- Data/hora das medições
-- Energia gerada (kWh)
-- Potência instantânea (kW)
+### Variáveis
+- `datetime` - Data e hora das medições
+- `energy_kwh` - Energia gerada (kWh)
+- `power_kw` - Potência instantânea (kW)
 
-**Período:** 5 anos  
-**Frequência:** Horária ou diária
+### Uso no Projeto
+**Módulo 1** - Treinamento Principal
+
+</details>
+
+<br clear="right"/>
 
 ---
 
 ## Dataset 2: Geração e Clima de Planta Industrial
+<img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" width="120" />
 
-### Arquivo A: `plant1_geracao.csv`
-**Nome original:** `Plant_1_Generation_Data.csv`  
-**Fonte:** Kaggle - Solar Power Generation Data  
-**Link:** https://www.kaggle.com/datasets/anikannal/solar-power-generation-data
+### Dataset 2A: Geração
 
-**Descrição:**  
-Dados de uma planta solar industrial com 22 inversores. Alta resolução temporal (15 minutos).
+<details>
+<summary><b>Ver detalhes de plant1_geracao.csv</b></summary>
 
-**Para que serve:**
+<br>
+
+**Arquivo:** `plant1_geracao.csv`  
+**Original:** `Plant_1_Generation_Data.csv`  
+**Fonte:** [Kaggle - Solar Power Generation Data](https://www.kaggle.com/datasets/anikannal/solar-power-generation-data)  
+**Período:** 34 dias (15 Mai - 17 Jun 2020)  
+**Registros:** ~68.000 linhas  
+**Frequência:** A cada 15 minutos  
+**Inversores:** 22 unidades
+
+### Descrição
+Dados de uma planta solar industrial com múltiplos inversores, oferecendo alta resolução temporal.
+
+### Para que serve
 - Validação cruzada do modelo
 - Comparar sistema residencial vs industrial
-- Análise de múltiplos inversores
+- Análise de desempenho de múltiplos inversores
 
-**Variáveis principais:**
-- `DATE_TIME`: Data e hora
-- `PLANT_ID`: ID da planta
-- `SOURCE_KEY`: Identificador do inversor (22 inversores)
-- `DC_POWER`: Potência DC gerada (kW) - **VARIÁVEL ALVO**
-- `AC_POWER`: Potência AC após inversor (kW)
-- `DAILY_YIELD`: Energia diária acumulada (kWh)
-- `TOTAL_YIELD`: Energia total acumulada (kWh)
+### Variáveis
+- `DATE_TIME` - Data e hora
+- `PLANT_ID` - ID da planta
+- `SOURCE_KEY` - Identificador do inversor (1-22)
+- `DC_POWER` - Potência DC gerada (kW) **[VARIÁVEL ALVO]**
+- `AC_POWER` - Potência AC após inversor (kW)
+- `DAILY_YIELD` - Energia diária acumulada (kWh)
+- `TOTAL_YIELD` - Energia total acumulada (kWh)
 
-**Período:** 34 dias (15 Maio - 17 Junho 2020)  
-**Registros:** ~68.000 linhas  
+### Uso no Projeto
+**Módulo 1** - Validação Cruzada
+
+</details>
+
+### Dataset 2B: Clima
+
+<details>
+<summary><b>Ver detalhes de plant1_clima.csv</b></summary>
+
+<br>
+
+**Arquivo:** `plant1_clima.csv`  
+**Original:** `Plant_1_Weather_Sensor_Data.csv`  
+**Fonte:** [Kaggle - Solar Power Generation Data](https://www.kaggle.com/datasets/anikannal/solar-power-generation-data)  
+**Período:** 34 dias (Mai-Jun 2020)  
 **Frequência:** A cada 15 minutos
 
----
+### Descrição
+Medições dos sensores climáticos instalados na planta, sincronizadas com os dados de geração.
 
-### Arquivo B: `plant1_clima.csv`
-**Nome original:** `Plant_1_Weather_Sensor_Data.csv`  
-**Fonte:** Kaggle - Solar Power Generation Data
-
-**Descrição:**  
-Medições dos sensores climáticos instalados na planta industrial.
-
-**Para que serve:**
-- Features (variáveis de entrada) para modelos
+### Para que serve
+- Features (entrada) para modelos de predição
 - Validar correlações clima-geração
 - Analisar impacto da temperatura nos painéis
 
-**Variáveis principais:**
-- `DATE_TIME`: Data e hora
-- `PLANT_ID`: ID da planta
-- `SOURCE_KEY`: Identificador do sensor
-- `AMBIENT_TEMPERATURE`: Temperatura do ar (°C)
-- `MODULE_TEMPERATURE`: Temperatura da superfície do painel (°C)
-- `IRRADIATION`: Irradiação solar medida no local (W/m²)
+### Variáveis
+- `DATE_TIME` - Data e hora
+- `PLANT_ID` - ID da planta
+- `SOURCE_KEY` - Identificador do sensor
+- `AMBIENT_TEMPERATURE` - Temperatura do ar (°C)
+- `MODULE_TEMPERATURE` - Temperatura da superfície do painel (°C)
+- `IRRADIATION` - Irradiação solar medida (W/m²)
 
-**Período:** 34 dias (Maio-Junho 2020)  
-**Frequência:** A cada 15 minutos
+### Uso no Projeto
+**Módulo 1** - Features para Predição
+
+</details>
+
+<br clear="right"/>
 
 ---
 
-## Dataset 3: Dados Climáticos Regionais (Satélite)
+## Dataset 3: Dados Climáticos Regionais (Satélite NASA)
+<img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Sun%20Behind%20Small%20Cloud.png" width="120" />
+
+<details>
+<summary><b>Ver detalhes de nasa_clima.csv</b></summary>
+
+<br>
 
 **Arquivo:** `nasa_clima.csv`  
-**Nome original:** `POWER_Point_Hourly_20220101_20241231_012d275_038d94W_UTC.csv`  
-**Fonte:** NASA POWER Project  
-**Link:** https://power.larc.nasa.gov
+**Original:** `POWER_Point_Hourly_20220101_20241231_012d275_038d94W_UTC.csv`  
+**Fonte:** [NASA POWER Project](https://power.larc.nasa.gov)  
+**Localização:** Brasil (Lat: -12.97, Lon: -38.50)  
+**Período:** 2022-2024 (3 anos)  
+**Frequência:** Horária
 
-**Descrição:**  
-Dados climáticos de satélite para validação externa. Fonte científica independente.
+### Descrição
+Dados climáticos de satélite para validação externa, oferecendo fonte científica independente e não enviesada.
 
-**Para que serve:**
+### Para que serve
 - Validação externa do modelo (dados não enviesados)
 - Comparar dados locais vs regionais
 - Benchmark com padrão científico
 - Testar robustez do modelo
 
-**Variáveis principais:**
-- `YEAR`, `MO`, `DY`, `HR`: Data e hora
-- `ALLSKY_SFC_SW_DWN`: Irradiação solar (kWh/m²)
-- `T2M`: Temperatura a 2 metros (°C)
-- `T2M_MAX`: Temperatura máxima diária (°C)
-- `T2M_MIN`: Temperatura mínima diária (°C)
-- `RH2M`: Umidade relativa (%)
-- `WS2M`: Velocidade do vento a 2m (m/s)
+### Variáveis
+- `YEAR`, `MO`, `DY`, `HR` - Data e hora
+- `ALLSKY_SFC_SW_DWN` - Irradiação solar (kWh/m²)
+- `T2M` - Temperatura a 2 metros (°C)
+- `T2M_MAX` / `T2M_MIN` - Temperatura máxima/mínima diária (°C)
+- `RH2M` - Umidade relativa (%)
+- `WS2M` - Velocidade do vento a 2m (m/s)
 
-**Localização:** Brasil (Lat: -12.97, Lon: -38.50)  
-**Período:** 2022-2024 (3 anos)  
-**Frequência:** Horária
+### Uso no Projeto
+**Módulo 1** - Validação Externa
 
----
+</details>
 
-## Dataset 4: Geração, Clima e Consumo (Conjunto Completo)
-
-**Fonte:** Kaggle - Electricity Demand and Solar Generation  
-**Link:** https://www.kaggle.com/datasets/pythonafroz/electricity-demand-and-solar-generation-data
-
-**Descrição geral:**  
-Conjunto de dados com geração solar, condições climáticas e demanda elétrica. Dados já divididos em treino/teste.
+<br clear="right"/>
 
 ---
 
-### Arquivo A: `geracao_treino.csv`
-**Nome original:** `pv_train_set4.csv`
+## Dataset 4: Conjunto Completo (Geração + Clima + Consumo)
+<img align="right" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Battery.png" width="120" />
 
-**Descrição:**  
-Dados de geração solar para treinamento.
+**Fonte:** [Kaggle - Electricity Demand and Solar Generation](https://www.kaggle.com/datasets/pythonafroz/electricity-demand-and-solar-generation-data)
 
-**Para que serve:**
-- Treinar modelos de predição
-- Análise de padrões de geração
+Conjunto integrado com geração solar, condições climáticas e demanda elétrica. Dados pré-divididos em treino/teste.
 
-**Variáveis esperadas:**
-- Data/hora
-- Geração solar (kW ou kWh)
+### 4A: Geração (Treino)
 
----
+<details>
+<summary><b>Ver detalhes de geracao_treino.csv</b></summary>
 
-### Arquivo B: `geracao_teste.csv`
-**Nome original:** `pv_test_set4.csv`
+<br>
 
-**Descrição:**  
-Dados de geração solar para teste.
+**Original:** `pv_train_set4.csv`  
+**Uso:** Treinar modelos de predição de geração solar  
+**Variáveis:** Data/hora, Geração solar (kW/kWh)  
+**Módulo:** 1
 
-**Para que serve:**
-- Avaliar performance dos modelos
-- Validação final
+</details>
 
----
+### 4B: Geração (Teste)
 
-### Arquivo C: `clima_treino.csv`
-**Nome original:** `weather_train_set4.csv`
+<details>
+<summary><b>Ver detalhes de geracao_teste.csv</b></summary>
 
-**Descrição:**  
-Condições climáticas para treinamento.
+<br>
 
-**Para que serve:**
-- Features para modelos de predição
-- Correlacionar clima com geração
+**Original:** `pv_test_set4.csv`  
+**Uso:** Avaliar performance dos modelos (validação final)  
+**Variáveis:** Data/hora, Geração solar (kW/kWh)  
+**Módulo:** 1
 
-**Variáveis esperadas:**
-- Temperatura
-- Irradiação solar
-- Umidade
-- Velocidade do vento
+</details>
 
----
+### 4C: Clima (Treino)
 
-### Arquivo D: `consumo_treino.csv`
-**Nome original:** `demand_train_set4.csv`
+<details>
+<summary><b>Ver detalhes de clima_treino.csv</b></summary>
 
-**Descrição:**  
-Demanda elétrica residencial para treinamento.
+<br>
 
-**Para que serve:**
-- Sistema de recomendações (Módulo 2)
-- Calcular balanço: Geração - Consumo
-- Otimizar uso de bateria
+**Original:** `weather_train_set4.csv`  
+**Uso:** Features para modelos (temperatura, irradiação, umidade, vento)  
+**Função:** Correlacionar clima com geração  
+**Módulo:** 1
 
-**Variáveis esperadas:**
-- Data/hora
-- Demanda elétrica (kW ou kWh)
-- Padrão de consumo
+</details>
 
----
+### 4D: Consumo (Treino)
 
-### Arquivo E: `consumo_teste.csv`
-**Nome original:** `demand_test_set4.csv`
+<details>
+<summary><b>Ver detalhes de consumo_treino.csv</b></summary>
 
-**Descrição:**  
-Demanda elétrica para teste.
+<br>
 
-**Para que serve:**
-- Validar sistema de recomendações
-- Testar balanço energético
+**Original:** `demand_train_set4.csv`  
+**Uso:** Sistema de recomendações  
+**Função:** Calcular balanço (Geração - Consumo), otimizar bateria  
+**Módulo:** 2
 
----
+</details>
 
-## 🎯 Resumo de Utilização
+### 4E: Consumo (Teste)
 
-| Dataset | Arquivos | Uso Principal | Módulo |
-|---------|----------|---------------|--------|
-| 1 | geracao_5anos.csv | Treinamento principal (5 anos) | Módulo 1 |
-| 2 | plant1_geracao.csv<br>plant1_clima.csv | Validação com planta industrial | Módulo 1 |
-| 3 | nasa_clima.csv | Validação externa (satélite) | Módulo 1 |
-| 4 | geracao_treino.csv<br>geracao_teste.csv<br>clima_treino.csv<br>consumo_treino.csv<br>consumo_teste.csv | Sistema completo com consumo | Módulos 1 e 2 |
+<details>
+<summary><b>Ver detalhes de consumo_teste.csv</b></summary>
+
+<br>
+
+**Original:** `demand_test_set4.csv`  
+**Uso:** Validar sistema de recomendações e balanço energético  
+**Módulo:** 2
+
+</details>
+
+<br clear="right"/>
 
 ---
 
-## 📈 Fluxo de Trabalho
+## Visão Geral
+
+### Resumo de Utilização
+
+**Dataset 1** - `geracao_5anos.csv`  
+→ Treinamento principal (5 anos) | Módulo 1
+
+**Dataset 2** - `plant1_geracao.csv` + `plant1_clima.csv`  
+→ Validação com planta industrial | Módulo 1
+
+**Dataset 3** - `nasa_clima.csv`  
+→ Validação externa (satélite) | Módulo 1
+
+**Dataset 4** - 5 arquivos (geração, clima, consumo)  
+→ Sistema completo com recomendações | Módulos 1 e 2
+
+### Estatísticas Gerais
+
+- **Total de arquivos:** 9 CSVs
+- **Período coberto:** 2015-2024 (~9 anos)
+- **Tipos de dados:** Geração solar, Condições climáticas, Consumo elétrico
+- **Organização:** Treino/teste separados
+
+<br>
+
+## Fluxo de Trabalho
+
 ```
-DATASET 1 (5 anos)
-    ↓
-TREINAR MODELOS DE PREDIÇÃO
-    ↓
-VALIDAR com DATASET 2 (Planta Industrial)
-    ↓
-VALIDAR EXTERNAMENTE com DATASET 3 (NASA)
-    ↓
-USAR DATASET 4 (Geração + Consumo)
-    ↓
-IMPLEMENTAR SISTEMA DE RECOMENDAÇÕES (Módulo 2)
-    ↓
-TESTAR com dados de teste (Dataset 4)
+┌─────────────────────────────────────────────────────────────┐
+│  DATASET 1 (5 anos)                                         │
+│  └─> Treinar Modelos de Predição                           │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  DATASET 2 (Planta Industrial)                              │
+│  └─> Validação Cruzada                                      │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  DATASET 3 (NASA)                                           │
+│  └─> Validação Externa                                      │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  DATASET 4 (Geração + Consumo)                              │
+│  └─> Sistema de Recomendações (Módulo 2)                   │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│  TESTE FINAL                                                │
+│  └─> Avaliação com Dados de Teste                          │
+└─────────────────────────────────────────────────────────────┘
 ```
 
----
-
-## 📊 Estatísticas Gerais
-
-**Total de arquivos:** 9 CSVs  
-**Período total coberto:** 2015-2024 (~9 anos)  
-**Tipos de dados:**
-- ✅ Geração solar (múltiplas fontes)
-- ✅ Condições climáticas (local e satélite)
-- ✅ Consumo elétrico residencial
-- ✅ Dados de treino e teste separados
+<br>
 
 ---
 
-## 🔗 Links Importantes
+<div align="center">
 
-- **Kaggle (Dataset 1):** https://www.kaggle.com/datasets/kollosp/10kwp-5years-power-generation
-- **Kaggle (Dataset 2):** https://www.kaggle.com/datasets/anikannal/solar-power-generation-data
-- **NASA POWER (Dataset 3):** https://power.larc.nasa.gov
-- **Kaggle (Dataset 4):** https://www.kaggle.com/datasets/pythonafroz/electricity-demand-and-solar-generation-data
-
----
-
-**Última atualização:** Novembro 2025  
 **Projeto:** Solarium SIEP - A3 2025.2  
 **Disciplina:** Sistemas de Controle e Inteligência Artificial  
 **Professor:** Noberto Maciel
-```
 
----
-
-## ✅ AÇÕES FINAIS
-
-### 1. Renomear Arquivos
-
-Na pasta `solarium_datasets`, renomeie:
-```
-pv.csv → geracao_5anos.csv
-
-Plant_1_Generation_Data.csv → plant1_geracao.csv
-Plant_1_Weather_Sensor_Data.csv → plant1_clima.csv
-
-POWER_Point_Hourly_[...].csv → nasa_clima.csv
-
-pv_train_set4.csv → geracao_treino.csv
-pv_test_set4.csv → geracao_teste.csv
-weather_train_set4.csv → clima_treino.csv
-demand_train_set4.csv → consumo_treino.csv
-demand_test_set4.csv → consumo_teste.csv
+</div>
